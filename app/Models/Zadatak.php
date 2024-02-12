@@ -11,6 +11,11 @@ class Zadatak extends Model
 {
     use HasFactory;
 
+    
+    protected $table = 'zadatak';
+    public $timestamps = false;
+
+
     protected $fillable=[
         'naslov',
         'opis',

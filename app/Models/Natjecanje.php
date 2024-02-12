@@ -11,6 +11,9 @@ class Natjecanje extends Model
 {
     use HasFactory;
 
+
+    protected $table = 'natjecanje';
+    public $timestamps = false;
     protected $fillable=[
         'naslov',
         'opis',
