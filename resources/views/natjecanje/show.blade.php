@@ -4,8 +4,9 @@
 <div class="container mt-4">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
+            <a href="{{ route('natjecanje.edit', $natjecanje->id) }}" class="btn btn-primary">Edit</a>
             <div>{{ $natjecanje->naslov }}</div>
-            <!-- Delete button form -->
+            
             <form action="{{ route('natjecanje.destroy', $natjecanje->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
