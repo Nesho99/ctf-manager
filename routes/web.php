@@ -1,7 +1,8 @@
 <?php
 
+use App\Models\Natjecanje;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\NatjecanjeControler;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +21,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('natjecanje', NatjecanjeControler::class);
