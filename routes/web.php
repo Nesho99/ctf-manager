@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ZadatakController;
 use App\Models\Natjecanje;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NatjecanjeControler;
@@ -22,3 +23,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('natjecanje', NatjecanjeControler::class);
+Route::resource('natjecanje.zadatak',ZadatakController::class)->shallow();
