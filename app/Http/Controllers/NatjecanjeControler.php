@@ -94,8 +94,10 @@ class NatjecanjeControler extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Natjecanje $natjecanje)
     {
-        //
+        $natjecanje->delete();
+
+        return redirect()->route('natjecanje.index');
     }
 }
