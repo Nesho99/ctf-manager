@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Natjecanje;
+use App\Models\Zadatak;
 use Illuminate\Http\Request;
 
 class NatjecanjeControler extends Controller
@@ -71,7 +72,7 @@ class NatjecanjeControler extends Controller
      * @param  Natjecanje  $id
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function edit(Natjecanje $natjecanje)
+    public function edit(Natjecanje $natjecanje, Zadatak $zadatak)
     {
         #dd($natjecanje);
         return view('natjecanje.edit', compact('natjecanje'));

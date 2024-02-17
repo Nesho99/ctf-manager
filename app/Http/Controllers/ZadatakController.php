@@ -67,18 +67,19 @@ class ZadatakController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function edit($id)
+    public function edit(Natjecanje $natjecanje, Zadatak $zadatak)
     {
-        //
+        return view('zadatak.edit',compact(['natjecanje','zadatak']));
+        
     }
 
     /**
@@ -88,9 +89,27 @@ class ZadatakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Natjecanje $natjecanje, Zadatak $zadatak)
     {
-        //
+        $validatedData = $request->validate([
+            'naslov' => 'required|max:255',
+            'opis' => 'required',
+            'kategorija' => 'required|max:255',
+            'tezina' => 'required|in:lako,srednje,tesko',
+            'zastavica' => 'required|max:255',
+            'bodovi' => 'required|integer|min:0',
+            'natjecanje_id' => 'required|exists:natjecanje,id'
+       
+    ]);
+        $zadatak->naslov=$validatedData["naslov"];
+        $zadatak->opis=$validatedData["opis"];
+        $zadatak->kategorija=$validatedData["kategorija"];
+        $zadatak->tezina=$validatedData["tezina"];
+        $zadatak->zastavica=$validatedData["zastavica"];
+        $zadatak->bodovi=$validatedData["bodovi"];
+        $zadatak->natjecanje_id=$natjecanje->id;
+        $zadatak->save();
+        return redirect()->route('natjecanje.show',$natjecanje);
     }
 
     /**
@@ -99,8 +118,10 @@ class ZadatakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( Natjecanje $natjecanje,Zadatak $zadatak)
     {
-        //
+        $zadatak->delete();
+
+        return redirect()->route('natjecanje.show',$natjecanje);
     }
 }
