@@ -24,7 +24,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('natjecanje', NatjecanjeControler::class);
+
 Route::resource('natjecanje.zadatak',ZadatakController::class);
+Route::post('/natjecanje/{natjecanje}/zadatak/{zadatak}/rijesi', [ZadatakController::class, 'rijesi'])->name('natjecanje.zadatak.rijesi');
 Route::controller(PrijavaController::class)->group(function(){
     Route::get('/natjecanje/{natjecanje}/prijava', [PrijavaController::class, 'store'])->name('natjecanje.prijava.store');
 });

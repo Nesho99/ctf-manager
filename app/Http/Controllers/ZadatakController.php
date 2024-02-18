@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Natjecanje;
+use App\Models\Rijesenje;
 use App\Models\Zadatak;
 use Illuminate\Http\Request;
+use Auth;
 
 class ZadatakController extends Controller
 {
@@ -124,4 +126,31 @@ class ZadatakController extends Controller
 
         return redirect()->route('natjecanje.show',$natjecanje);
     }
+
+    public function rijesi(Request $request, Natjecanje $natjecanje, Zadatak $zadatak)
+    {
+        // Validate the request
+        $validatedData = $request->validate([
+            'zastavica' => 'required|max:255', // Add other validation rules as needed
+        ]);
+
+        $zastavica = $validatedData['zastavica'];
+
+        if($zadatak->zastavica== $zastavica){
+
+            $rijesenje= new Rijesenje();
+            
+            $rijesenje->zadatak_id=$zadatak->id;
+            $rijesenje->user_id=Auth::id();
+            $rijesenje->save();
+        }
+
+
+
+
+      
+        return redirect()->back();
+    }
 }
+
+

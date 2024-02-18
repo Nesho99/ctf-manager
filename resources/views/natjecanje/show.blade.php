@@ -9,6 +9,7 @@ $zadatci= $natjecanje->zadatci()->get()
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h3>{{ $natjecanje->naslov }}</h3>
+            @if(Auth::user()->jeAdmin())
             <div>
                 <a href="{{ route('natjecanje.edit', $natjecanje->id) }}" class="btn btn-primary">Edit</a>
                 <form action="{{ route('natjecanje.destroy', $natjecanje->id) }}" method="POST" class="d-inline">
@@ -18,6 +19,7 @@ $zadatci= $natjecanje->zadatci()->get()
                         onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
                 </form>
             </div>
+            @endif
         </div>
         <div class="card-body">
             <p class="card-text">{{ $natjecanje->opis }}</p>
@@ -26,11 +28,13 @@ $zadatci= $natjecanje->zadatci()->get()
             @if ($natjecanje->traje())
             <a href="{{ route('natjecanje.prijava.store', $natjecanje->id) }}" class="btn btn-success">Prijava</a>
             @endif
-         
+
             <h3 class="mt-3">Zadatci
+            @if(Auth::user()->jeAdmin())
                 <a href="{{ route('natjecanje.zadatak.create', [$natjecanje]) }}" title="Create" class="text-primary">
                     <i class="fa fa-circle-plus"></i>
                 </a>
+                @endif
             </h3>
             <div class="mt-1">
 
@@ -39,6 +43,7 @@ $zadatci= $natjecanje->zadatci()->get()
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">{{ $zadatak->naslov }}</h5>
                         <div>
+                        @if(Auth::user()->jeAdmin())
                             <a href="{{ route('natjecanje.zadatak.edit', [$natjecanje,$zadatak]) }}" title="Edit"
                                 class="text-primary">
                                 <i class="fa fa-edit"></i>
@@ -52,6 +57,7 @@ $zadatci= $natjecanje->zadatci()->get()
                                     style="background: none; border: none; padding: 0; margin: 0;">
                                     <i class="fa fa-trash" title="Delete"></i>
                                 </button>
+                                @endif
                             </form>
                         </div>
                     </div>
@@ -61,10 +67,23 @@ $zadatci= $natjecanje->zadatci()->get()
                         <p class="card-text"><strong>Težina:</strong> {{ $zadatak->tezina }}</p>
                         @if (Auth::user()->jeAdmin())
                         <p class="card-text"><strong>Zastavica:</strong> {{ $zadatak->zastavica }}</p>
-                            
+
                         @endif
-                      
                         <p class="card-text"><strong>Bodovi:</strong> {{ $zadatak->bodovi }}</p>
+
+                        <form action="{{ route('natjecanje.zadatak.rijesi', [ $natjecanje, $zadatak]) }}" method="POST">
+                            @csrf
+
+                            <div class="form-group">
+                                <input type="text" id="zastavica" , class="form-control" name="zastavica"
+                                    placeholder="Zastavica" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-success mt-2">Predaj</button>
+                        </form>
+                        <div class="alert alert-success" role="alert">
+                            A simple success alert—check it out!
+                        </div>
                     </div>
                 </div>
                 @endforeach
