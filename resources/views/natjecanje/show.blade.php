@@ -32,7 +32,7 @@ $zadatci= $natjecanje->zadatci()->get()
             @auth
                 
            
-            @if ($natjecanje->traje())
+            @if ($natjecanje->traje() && !Auth::user()->jePrijavljenNaNatjecanje($natjecanje->id))
             <a href="{{ route('natjecanje.prijava.store', $natjecanje->id) }}" class="btn btn-success">Prijava</a>
             @endif
             @endauth
