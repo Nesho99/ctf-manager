@@ -16,10 +16,11 @@ class PrijavaController extends Controller
             $prijava = new Prijava();
             $prijava->natjecanje_id = $natjecanje->id;
             $prijava->user_id = Auth::id();
+            $prijava->save();
 
         }
 
-        return redirect()->route('natjecanje.index', $natjecanje);
+        return redirect()->route('natjecanje.show', $natjecanje);
 
 
     }
