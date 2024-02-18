@@ -65,7 +65,7 @@ class User extends Authenticatable
                     ->exists();
     }
 
-    public function jePrijavljenNaNatjecanje($id){
+    public function jePrijavljenNatjecanje($id){
         return $this->natjecanja()
                     ->where('id', $id)
                     ->exists();

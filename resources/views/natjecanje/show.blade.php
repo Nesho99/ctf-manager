@@ -32,7 +32,7 @@ $zadatci= $natjecanje->zadatci()->get()
             @auth
                 
            
-            @if ($natjecanje->traje() && !Auth::user()->jePrijavljenNaNatjecanje($natjecanje->id))
+            @if ($natjecanje->traje() && !Auth::user()->jePrijavljenNatjecanje($natjecanje->id))
             <a href="{{ route('natjecanje.prijava.store', $natjecanje->id) }}" class="btn btn-success">Prijava</a>
             @endif
             
@@ -47,10 +47,11 @@ $zadatci= $natjecanje->zadatci()->get()
                 
               
             </h3>
+
             <div class="mt-1">
           
                     
-             
+                @if(Auth::user()->jeAdmin() || Auth::user()->jePrijavljenNatjecanje($natjecanje->id))
                 @foreach ($zadatci as $zadatak)
                 <div class="card mb-3">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -104,6 +105,7 @@ $zadatci= $natjecanje->zadatci()->get()
                     </div>
                 </div>
                 @endforeach
+                @endif
                 @endauth
 
             </div>
