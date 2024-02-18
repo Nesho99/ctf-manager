@@ -9,7 +9,7 @@ $zadatci= $natjecanje->zadatci()->get()
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h3>{{ $natjecanje->naslov }}</h3>
-            @auth
+        @auth
                 
           
             @if(Auth::user()->jeAdmin())
@@ -23,7 +23,7 @@ $zadatci= $natjecanje->zadatci()->get()
                 </form>
             </div>
             @endif
-            @endauth
+        @endauth
         </div>
         <div class="card-body">
             <p class="card-text">{{ $natjecanje->opis }}</p>
@@ -35,8 +35,8 @@ $zadatci= $natjecanje->zadatci()->get()
             @if ($natjecanje->traje() && !Auth::user()->jePrijavljenNaNatjecanje($natjecanje->id))
             <a href="{{ route('natjecanje.prijava.store', $natjecanje->id) }}" class="btn btn-success">Prijava</a>
             @endif
-            @endauth
-            @auth   
+            
+              
             <h3 class="mt-3">Zadatci
           
             @if(Auth::user()->jeAdmin())
@@ -44,16 +44,19 @@ $zadatci= $natjecanje->zadatci()->get()
                     <i class="fa fa-circle-plus"></i>
                 </a>
                 @endif
+                
               
             </h3>
             <div class="mt-1">
-
+          
+                    
+             
                 @foreach ($zadatci as $zadatak)
                 <div class="card mb-3">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">{{ $zadatak->naslov }}</h5>
                         <div>
-                        @auth
+                 
                             
                            
                         @if(Auth::user()->jeAdmin())
@@ -71,7 +74,7 @@ $zadatci= $natjecanje->zadatci()->get()
                                     <i class="fa fa-trash" title="Delete"></i>
                                 </button>
                                 @endif
-                                @endauth
+                            
                             </form>
                         </div>
                     </div>
@@ -102,6 +105,7 @@ $zadatci= $natjecanje->zadatci()->get()
                 </div>
                 @endforeach
                 @endauth
+
             </div>
 
 
