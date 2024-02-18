@@ -23,6 +23,10 @@ $zadatci= $natjecanje->zadatci()->get()
             <p class="card-text">{{ $natjecanje->opis }}</p>
             <p class="card-text"><strong>Početak:</strong> {{ $natjecanje->pocetak->format('d.m.Y H:i') }}</p>
             <p class="card-text"><strong>Kraj:</strong> {{ $natjecanje->kraj->format('d.m.Y H:i') }}</p>
+            @if ($natjecanje->traje())
+            <a href="{{ route('natjecanje.prijava.store', $natjecanje->id) }}" class="btn btn-success">Prijava</a>
+            @endif
+         
             <h3 class="mt-3">Zadatci
                 <a href="{{ route('natjecanje.zadatak.create', [$natjecanje]) }}" title="Create" class="text-primary">
                     <i class="fa fa-circle-plus"></i>
@@ -55,7 +59,11 @@ $zadatci= $natjecanje->zadatci()->get()
                         <p class="card-text">{{ $zadatak->opis }}</p>
                         <p class="card-text"><strong>Kategorija:</strong> {{ $zadatak->kategorija }}</p>
                         <p class="card-text"><strong>Težina:</strong> {{ $zadatak->tezina }}</p>
+                        @if (Auth::user()->jeAdmin())
                         <p class="card-text"><strong>Zastavica:</strong> {{ $zadatak->zastavica }}</p>
+                            
+                        @endif
+                      
                         <p class="card-text"><strong>Bodovi:</strong> {{ $zadatak->bodovi }}</p>
                     </div>
                 </div>

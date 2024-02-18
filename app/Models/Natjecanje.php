@@ -14,7 +14,7 @@ class Natjecanje extends Model
 
     protected $table = 'natjecanje';
     public $timestamps = false;
-    protected $fillable=[
+    protected $fillable = [
         'naslov',
         'opis',
         'pocetak',
@@ -22,8 +22,8 @@ class Natjecanje extends Model
     ];
 
     protected $hidden = [
-       
-        
+
+
     ];
 
     /**
@@ -34,21 +34,30 @@ class Natjecanje extends Model
     protected $casts = [
         'pocetak' => 'datetime',
         'kraj' => 'datetime'
-        
-        
+
+
     ];
 
-    protected $guarded=[
-        
-    ];
+    protected $guarded = [
 
-    public function zadatci(): HasMany{
+    ];
+    public function traje()
+    {
+        $sad = now();
+        return $this->pocetak <= $sad && $this->kraj >= $sad;
+
+
+        
+    }
+
+    public function zadatci(): HasMany
+    {
 
         return $this->HasMany(Zadatak::class);
 
     }
 
 
-    
+
 }
 

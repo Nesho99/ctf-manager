@@ -46,7 +46,7 @@
 
 
 
-        <button type="submit" class="btn btn-success mt-2">Kreiraj</button>
+        <button type="submit" class="btn btn-success mt-2">Uredi</button>
     </form>
 </div>
 @endsection

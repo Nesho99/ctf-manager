@@ -45,4 +45,8 @@ class User extends Authenticatable
     protected $guarded=[
         'role'
     ];
+
+    function jeAdmin(){
+       return  $this->role == 2;
+    }
 }

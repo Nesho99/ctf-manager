@@ -72,7 +72,7 @@ class NatjecanjeControler extends Controller
      * @param  Natjecanje  $id
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function edit(Natjecanje $natjecanje, Zadatak $zadatak)
+    public function edit(Natjecanje $natjecanje)
     {
         #dd($natjecanje);
         return view('natjecanje.edit', compact('natjecanje'));
@@ -87,12 +87,14 @@ class NatjecanjeControler extends Controller
      */
     public function update(Request $request, Natjecanje $natjecanje)
     {
-        $validatedData = $request->validate([
-            'naslov' => 'required|unique:natjecanje|max:255',
-            'opis' => 'required|max:255',
-            'pocetak' => 'required|date',
-            'kraj' => 'required|date',
-        ]);
+    
+         $validatedData = $request->validate([
+             'naslov' => 'required|:natjecanje|max:255',
+             'opis' => 'required|max:255',
+             'pocetak' => 'required|date',
+             'kraj' => 'required|date',
+         ]);
+        
 
         $natjecanje->naslov = $validatedData['naslov'];
         $natjecanje->opis = $validatedData['opis'];
@@ -100,7 +102,7 @@ class NatjecanjeControler extends Controller
         $natjecanje->kraj = $validatedData['kraj'];
         $natjecanje->save();
 
-        return redirect()->route('natjecanje.index');
+        return redirect()->route('natjecanje.show',$natjecanje);
         
     }
 
