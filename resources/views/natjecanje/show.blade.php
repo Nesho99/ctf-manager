@@ -88,7 +88,9 @@ $zadatci= $natjecanje->zadatci()->get()
 
                         @endif
                         <p class="card-text"><strong>Bodovi:</strong> {{ $zadatak->bodovi }}</p>
-
+                        @if (!Auth::user()->rijesioZadatak($zadatak->id))
+                            
+                        @if($natjecanje->traje())
                         <form action="{{ route('natjecanje.zadatak.rijesi', [ $natjecanje, $zadatak]) }}" method="POST">
                             @csrf
 
@@ -99,9 +101,17 @@ $zadatci= $natjecanje->zadatci()->get()
 
                             <button type="submit" class="btn btn-success mt-2">Predaj</button>
                         </form>
-                        <div class="alert alert-success" role="alert">
-                            A simple success alert—check it out!
+                        @else
+                        <div class="alert alert-warning">
+                            Natjecanje je završilo
                         </div>
+                        @endif
+                        @else
+
+                        <div class="alert alert-success">
+                            Zadatak je riješen
+                        </div>
+                    @endif
                     </div>
                 </div>
                 @endforeach
