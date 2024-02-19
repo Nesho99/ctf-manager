@@ -150,8 +150,11 @@ class ZadatakController extends Controller
             $rijesenje->user_id=Auth::id();
             $rijesenje->save();
             toastr()->success("Zadatk riješen");
+        }else{
+            toastr()->error("Pogrešna zastavica");
+
         }
-        toastr()->error("Pogrešna zastavica");
+        
 
 
 
