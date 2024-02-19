@@ -10,6 +10,10 @@ use Auth;
 
 class ZadatakController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth','je_admin'])->except('index','show','rijesi');
+        $this->middleware(['auth'])->only('rijesi');
+    }
     /**
      * Display a listing of the resource.
      *
