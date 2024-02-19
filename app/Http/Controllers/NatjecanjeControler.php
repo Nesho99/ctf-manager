@@ -54,7 +54,7 @@ class NatjecanjeControler extends Controller
     $natjecanje->pocetak = $validatedData['pocetak'];
     $natjecanje->kraj = $validatedData['kraj'];
     $natjecanje->save();
-
+    toastr()->success("Natjecanje kreirano");
     return redirect()->route('natjecanje.index');
     }
 
@@ -86,7 +86,7 @@ class NatjecanjeControler extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Natjecanje $natjecanje)
     {
@@ -104,6 +104,8 @@ class NatjecanjeControler extends Controller
         $natjecanje->pocetak = $validatedData['pocetak'];
         $natjecanje->kraj = $validatedData['kraj'];
         $natjecanje->save();
+        toastr()->success("Natjecanje ažurirano");
+      
 
         return redirect()->route('natjecanje.show',$natjecanje);
         
@@ -118,7 +120,7 @@ class NatjecanjeControler extends Controller
     public function destroy(Natjecanje $natjecanje)
     {
         $natjecanje->delete();
-
+        toastr()->success("Natjecanje obrisano");
         return redirect()->route('natjecanje.index');
     }
 }

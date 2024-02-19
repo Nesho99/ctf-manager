@@ -17,6 +17,7 @@ class PrijavaController extends Controller
             $prijava->natjecanje_id = $natjecanje->id;
             $prijava->user_id = Auth::id();
             $prijava->save();
+            toastr()->success("Prijava uspješna");
 
         }
 

@@ -62,6 +62,7 @@ class ZadatakController extends Controller
         $zadatak->bodovi=$validatedData["bodovi"];
         $zadatak->natjecanje_id=$natjecanje->id;
         $zadatak->save();
+        toastr()->success("Zadatak kreiran");
         return redirect()->route('natjecanje.show',$natjecanje);
     }
 
@@ -115,6 +116,7 @@ class ZadatakController extends Controller
         $zadatak->bodovi=$validatedData["bodovi"];
         $zadatak->natjecanje_id=$natjecanje->id;
         $zadatak->save();
+        toastr()->success("Zadatak ažuriran");
         return redirect()->route('natjecanje.show',$natjecanje);
     }
 
@@ -147,7 +149,9 @@ class ZadatakController extends Controller
             $rijesenje->zadatak_id=$zadatak->id;
             $rijesenje->user_id=Auth::id();
             $rijesenje->save();
+            toastr()->success("Zadatk riješen");
         }
+        toastr()->error("Pogrešna zastavica");
 
 
 

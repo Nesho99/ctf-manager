@@ -3,11 +3,17 @@
 
 @section('content')
 <div class="container mt-4">
+    @auth
+        @if (Auth::user()->jeAdmin())
+            
+      
     <div class="row">
         <div class="col-12 mb-3">
             <a href="{{ route('natjecanje.create') }}" class="btn btn-primary"> Kreiraj natjecanje</a>
         </div>
     </div>
+    @endif
+    @endauth
     <div class="row">
         
         @foreach ($natjecanja as $natjecanje)
