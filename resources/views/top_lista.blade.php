@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container mt-4">
-    <h2>Korisnici po bodovima</h2>
+    <h2> Top lista</h2>
     <div class="card">
         <div class="card-body">
             <table class="table table-striped">
@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($usersWithPoints as $index => $user)
+                    @forelse($korisnici as $index => $user)
                         <tr>
                             <th scope="row">{{ $index + 1 }}</th>
                             <td>{{ $user->name }}</td>

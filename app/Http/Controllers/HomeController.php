@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Natjecanje;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,35 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user_id = auth()->id();
+
+$zaPrijavu = DB::select('
+    SELECT * FROM natjecanje
+    WHERE 
+        pocetak <= CURRENT_TIMESTAMP AND 
+        kraj >= CURRENT_TIMESTAMP AND 
+        NOT EXISTS (
+            SELECT 1 FROM prijava 
+            WHERE 
+                prijava.natjecanje_id = natjecanje.id AND 
+                prijava.user_id = ?
+        )
+', [$user_id]);
+
+$traje = DB::select('
+    SELECT * FROM natjecanje
+    WHERE 
+        pocetak <= CURRENT_TIMESTAMP AND 
+        kraj >= CURRENT_TIMESTAMP AND 
+        EXISTS (
+            SELECT 1 FROM prijava 
+            WHERE 
+                prijava.natjecanje_id = natjecanje.id AND 
+                prijava.user_id = ?
+        )
+', [$user_id]);
+
+return view('home', compact('zaPrijavu', 'traje'));
     }
 }
+

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PrijavaController;
+use App\Http\Controllers\TopLista;
 use App\Http\Controllers\ZadatakController;
 use App\Models\Natjecanje;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,4 @@ Route::controller(PrijavaController::class)->group(function(){
     Route::get('/natjecanje/{natjecanje}/prijava', [PrijavaController::class, 'store'])->name('natjecanje.prijava.store');
 });
 
-Route::get('/top-lista', [::class, 'topLista'])->name('top.lista');
+Route::get('/top-lista', [TopLista::class, 'topLista'])->name('top.lista');
