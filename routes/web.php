@@ -29,3 +29,5 @@ Route::post('/natjecanje/{natjecanje}/zadatak/{zadatak}/rijesi', [ZadatakControl
 Route::controller(PrijavaController::class)->group(function(){
     Route::get('/natjecanje/{natjecanje}/prijava', [PrijavaController::class, 'store'])->name('natjecanje.prijava.store');
 });
+
+Route::get('/top-lista', [::class, 'topLista'])->name('top.lista');
