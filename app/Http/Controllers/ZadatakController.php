@@ -49,6 +49,7 @@ class ZadatakController extends Controller
                 'tezina' => 'required|in:lako,srednje,tesko',
                 'zastavica' => 'required|max:255',
                 'bodovi' => 'required|integer|min:0',
+                'pomoc' => 'required|max:255',
                 'natjecanje_id' => 'required|exists:natjecanje,id'
            
         ]);
@@ -105,6 +106,7 @@ class ZadatakController extends Controller
             'tezina' => 'required|in:lako,srednje,tesko',
             'zastavica' => 'required|max:255',
             'bodovi' => 'required|integer|min:0',
+            'pomoc' => 'required|max:255',
             'natjecanje_id' => 'required|exists:natjecanje,id'
        
     ]);
@@ -114,6 +116,7 @@ class ZadatakController extends Controller
         $zadatak->tezina=$validatedData["tezina"];
         $zadatak->zastavica=$validatedData["zastavica"];
         $zadatak->bodovi=$validatedData["bodovi"];
+        $zadatak->pomoc=$validatedData["pomoc"];
         $zadatak->natjecanje_id=$natjecanje->id;
         $zadatak->save();
         toastr()->success("Zadatak ažuriran");

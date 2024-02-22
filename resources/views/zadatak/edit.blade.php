@@ -36,6 +36,10 @@
             <input type="text" class="form-control" id="zastavica" name="zastavica" value="{{$zadatak->zastavica}}"
                 required>
         </div>
+        <div class="form-group">
+            <label for="pomoc">Pomoć</label>
+            <input type="text" class="form-control" id="pomoc" name="pomoc" value="{{$zadatak->pomoc}}"  required>
+        </div>
 
         <div class="form-group">
             <label for="bodovi">Bodovi</label>

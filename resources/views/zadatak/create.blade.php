@@ -38,6 +38,10 @@
             <label for="bodovi">Bodovi</label>
             <input type="number" class="form-control" id="bodovi" name="bodovi" required>
         </div>
+        <div class="form-group">
+            <label for="pomoc">Pomoć</label>
+            <input type="text" class="form-control" id="pomoc" name="pomoc" required>
+        </div>
 
         <input type="hidden" name="natjecanje_id" value="{{ $natjecanje->id }}">
 
