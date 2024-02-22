@@ -88,7 +88,7 @@ $zadatci= $natjecanje->zadatci()->get()
 
                         @endif
                         <p class="card-text"><strong>Bodovi:</strong> {{ $zadatak->bodovi }}</p>
-                        <div class="accordion" id="accordionPomoc{{$zadatak->id}}">
+                        <div class="accordion  id="accordionPomoc{{$zadatak->id}}">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="heading-{{$zadatak->id}}">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -106,7 +106,7 @@ $zadatci= $natjecanje->zadatci()->get()
                             @if (!Auth::user()->rijesioZadatak($zadatak->id))
 
                             @if($natjecanje->traje())
-                            <form action="{{ route('natjecanje.zadatak.rijesi', [ $natjecanje, $zadatak]) }}"
+                            <form class="mt-2" action="{{ route('natjecanje.zadatak.rijesi', [ $natjecanje, $zadatak]) }}"
                                 method="POST">
                                 @csrf
 
@@ -124,7 +124,7 @@ $zadatci= $natjecanje->zadatci()->get()
                             @endif
                             @else
 
-                            <div class="alert alert-success">
+                            <div class="mt-2 alert alert-success">
                                 Zadatak je riješen
                             </div>
                             @endif
