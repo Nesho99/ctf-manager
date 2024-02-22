@@ -61,6 +61,7 @@ class ZadatakController extends Controller
         $zadatak->tezina=$validatedData["tezina"];
         $zadatak->zastavica=$validatedData["zastavica"];
         $zadatak->bodovi=$validatedData["bodovi"];
+        $zadatak->pomoc=$validatedData["pomoc"];
         $zadatak->natjecanje_id=$natjecanje->id;
         $zadatak->save();
         toastr()->success("Zadatak kreiran");
