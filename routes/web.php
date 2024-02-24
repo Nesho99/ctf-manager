@@ -28,8 +28,10 @@ Route::resource('natjecanje', NatjecanjeControler::class);
 Route::resource('natjecanje.zadatak',ZadatakController::class);
 Route::post('/natjecanje/{natjecanje}/zadatak/{zadatak}/rijesi', [ZadatakController::class, 'rijesi'])->name('natjecanje.zadatak.rijesi');
 Route::post('/natjecanje/{natjecanje}/zadatak/{zadatak}/upload', [ZadatakController::class, 'upload'])->name('natjecanje.zadatak.upload');
+
+
 Route::controller(PrijavaController::class)->group(function(){
-    Route::get('/natjecanje/{natjecanje}/prijava', [PrijavaController::class, 'upload'])->name('natjecanje.prijava.upload');
+    Route::get('/natjecanje/{natjecanje}/prijava', [PrijavaController::class, 'store'])->name('natjecanje.prijava.store');
 });
 
 Route::get('/top-lista', [TopLista::class, 'topLista'])->name('top.lista');
