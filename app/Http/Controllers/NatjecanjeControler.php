@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Natjecanje;
 use App\Models\Zadatak;
+use Exception;
 use Illuminate\Http\Request;
 
 class NatjecanjeControler extends Controller
@@ -119,8 +120,13 @@ class NatjecanjeControler extends Controller
      */
     public function destroy(Natjecanje $natjecanje)
     {
+        try{
         $natjecanje->delete();
         toastr()->success("Natjecanje obrisano");
         return redirect()->route('natjecanje.index');
+        }catch (Exception $exception ){
+            toastr()->warning("Nije moguće obrisati natjecanje");
+        return redirect()->route('natjecanje.index');
+        }
     }
 }

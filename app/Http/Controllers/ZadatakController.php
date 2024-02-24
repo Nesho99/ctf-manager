@@ -6,6 +6,7 @@ use App\Models\Dokument;
 use App\Models\Natjecanje;
 use App\Models\Rijesenje;
 use App\Models\Zadatak;
+use Exception;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -134,9 +135,15 @@ class ZadatakController extends Controller
      */
     public function destroy(Natjecanje $natjecanje, Zadatak $zadatak)
     {
+        try{
         $zadatak->delete();
-
+        toastr()->success("Zadatak uspješno obrisan");
         return redirect()->route('natjecanje.show', $natjecanje);
+        }catch(Exception $exception){
+            toastr()->warning("Nije moguće obrisati zadatak");
+        return redirect()->route('natjecanje.show', $natjecanje);
+
+        }
     }
 
     public function rijesi(Request $request, Natjecanje $natjecanje, Zadatak $zadatak)
