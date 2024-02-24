@@ -51,7 +51,8 @@ $zadatci= $natjecanje->zadatci()->get()
             <div class="mt-1">
 
 
-                @if(Auth::user()->jeAdmin() || Auth::user()->jePrijavljenNatjecanje($natjecanje->id))
+                @if(Auth::user()->jeAdmin() || Auth::user()->jePrijavljenNatjecanje($natjecanje->id) ||
+                $natjecanje->jeZavrsilo())
                 @foreach ($zadatci as $zadatak)
                 <div class="card mb-3">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -88,16 +89,18 @@ $zadatci= $natjecanje->zadatci()->get()
 
                         @endif
                         <p class="card-text"><strong>Bodovi:</strong> {{ $zadatak->bodovi }}</p>
-                        <div class="accordion  id="accordionPomoc{{$zadatak->id}}">
+                        <div class="accordion  id=" accordionPomoc{{$zadatak->id}}">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="heading-{{$zadatak->id}}">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse-{{$zadatak->id}}" aria-expanded="false" aria-controls="collapse-{{$zadatak->id}}">
+                                        data-bs-target="#collapse-{{$zadatak->id}}" aria-expanded="false"
+                                        aria-controls="collapse-{{$zadatak->id}}">
                                         Pomoć
                                     </button>
                                 </h2>
                                 <div id="collapse-{{$zadatak->id}}" class="accordion-collapse collapse"
-                                    aria-labelledby="heading-{{$zadatak->id}}" data-bs-parent="#accordionPomoc{{$zadatak->id}}">
+                                    aria-labelledby="heading-{{$zadatak->id}}"
+                                    data-bs-parent="#accordionPomoc{{$zadatak->id}}">
                                     <div class="accordion-body">
                                         {{$zadatak->pomoc}}
                                     </div>
@@ -106,7 +109,8 @@ $zadatci= $natjecanje->zadatci()->get()
                             @if (!Auth::user()->rijesioZadatak($zadatak->id))
 
                             @if($natjecanje->traje())
-                            <form class="mt-2" action="{{ route('natjecanje.zadatak.rijesi', [ $natjecanje, $zadatak]) }}"
+                            <form class="mt-2"
+                                action="{{ route('natjecanje.zadatak.rijesi', [ $natjecanje, $zadatak]) }}"
                                 method="POST">
                                 @csrf
 
@@ -119,7 +123,7 @@ $zadatci= $natjecanje->zadatci()->get()
                             </form>
                             @else
                             <div class="alert alert-warning">
-                                Natjecanje je završilo
+                                Natjecanje ne traje
                             </div>
                             @endif
                             @else
@@ -127,7 +131,30 @@ $zadatci= $natjecanje->zadatci()->get()
                             <div class="mt-2 alert alert-success">
                                 Zadatak je riješen
                             </div>
+                            <form class="mt-2"
+                                action="{{ route('natjecanje.zadatak.upload', [$natjecanje, $zadatak]) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="form-group">
+                                    <input type="file" id="datoteka" class="form-control" name="datoteka" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-success mt-2">Pošalji</button>
+                            </form>
+
                             @endif
+                            @if ($natjecanje->jeZavrsilo() )
+                            <ul style="list-style-type: none;">
+                                @foreach ($zadatak->dokumenti as $dokument)
+                                <li>
+                                    <i class="fa fa-file" style="margin-right: 8px;"></i>
+                                    {{ $dokument->ime}} - <a href="{{ asset($dokument->putanja) }}"
+                                        download>Skini</a>
+                                </li>
+                                @endforeach
+
+                                @endif
                         </div>
                     </div>
                     @endforeach

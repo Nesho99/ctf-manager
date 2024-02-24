@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dokument;
 use App\Models\Natjecanje;
 use App\Models\Rijesenje;
 use App\Models\Zadatak;
@@ -142,7 +143,7 @@ class ZadatakController extends Controller
     {
         // Validate the request
         $validatedData = $request->validate([
-            'zastavica' => 'required|max:255', // Add other validation rules as needed
+            'zastavica' => 'required|max:255', 
         ]);
 
         $zastavica = $validatedData['zastavica'];
@@ -168,19 +169,29 @@ class ZadatakController extends Controller
         return redirect()->back();
     }
 
-    public function upload(Request $request, Zadatak $zadatak)
+    public function upload(Request $request, Natjecanje $natjecanje, Zadatak $zadatak)
     { {
-            $request->validate([
-                'file' => 'required|file|max:5120|mimes:pdf'
-            ]);
 
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('uploads'), $filename);
+            if ($request->hasFile('datoteka')) {
+                $validatedData = $request->validate([
+                    'datoteka' => 'required|file|mimes:pdf', 
+                ]);
+        
+                $datoteka = $request->file('datoteka');
+                $putanja = time() . '_' . $datoteka->getClientOriginalName();
+                $datoteka->move(public_path('datoteke'), $putanja);
+                $dokument= new Dokument();
+                $dokument->ime= $datoteka->getClientOriginalName();
+                $dokument->putanja=$putanja;
+                $dokument->user_id= Auth::user()->id;
+                $dokument->zadatak_id= $zadatak->id;
+                $dokument->save();
 
-                return back()
+                toastr()->success("Prenošenje datoteke uspješno");
+
+                return back();
             }
+            toastr()->warning("Molimo izaberite datoteku");
 
             return back();
         }

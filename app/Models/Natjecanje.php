@@ -49,6 +49,10 @@ class Natjecanje extends Model
 
         
     }
+    public function jeZavrsilo(){
+        $sad = now();
+        return $sad > $this->kraj;
+    }
 
     public function zadatci(): HasMany
     {
