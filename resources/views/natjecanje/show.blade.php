@@ -89,23 +89,9 @@ $zadatci= $natjecanje->zadatci()->get()
 
                         @endif
                         <p class="card-text"><strong>Bodovi:</strong> {{ $zadatak->bodovi }}</p>
-                        <div class="accordion  id=" accordionPomoc{{$zadatak->id}}">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="heading-{{$zadatak->id}}">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse-{{$zadatak->id}}" aria-expanded="false"
-                                        aria-controls="collapse-{{$zadatak->id}}">
-                                        Pomoć
-                                    </button>
-                                </h2>
-                                <div id="collapse-{{$zadatak->id}}" class="accordion-collapse collapse"
-                                    aria-labelledby="heading-{{$zadatak->id}}"
-                                    data-bs-parent="#accordionPomoc{{$zadatak->id}}">
-                                    <div class="accordion-body">
-                                        {{$zadatak->pomoc}}
-                                    </div>
-                                </div>
-                            </div>
+                        @livewire('pomoc', ['zadatak' => $zadatak])
+
+                        
                             @if (!Auth::user()->rijesioZadatak($zadatak->id))
 
                             @if($natjecanje->traje())
