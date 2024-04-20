@@ -40,7 +40,7 @@ class Pomoc extends Component
                     $pomoc->save();
 
                 } else {
-                    $this->odgovor ="Pomoc će biti dostupna u ". $vrijeme_zadnjeg_pristupa->addMinutes(15)->toDateTimeLocalString();
+                    $this->odgovor ="Pomoć će biti dostupna u ". $vrijeme_zadnjeg_pristupa->addMinutes(15)->toDateTimeLocalString();
                     
                 }
             } else {
