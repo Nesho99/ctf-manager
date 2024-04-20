@@ -8,18 +8,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
-class Zadatak extends Model
+class PristupPomoci extends Model
 {
     use HasFactory;
 
     
-    protected $table = 'zadatak';
+    protected $table = 'pristup_pomoci';
     public $timestamps = false;
 
 
     protected $fillable=[
-        'user_id',
-        'natjecanje_id',
+        'naslov',
+        'opis',
+        'kategorija',
+        'tezina',
+        'bodovi',
+        'natjecanje'
     ];
 
     public function natjecanje() : BelongsTo{
