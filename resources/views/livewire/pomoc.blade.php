@@ -3,7 +3,7 @@
         <h2 class="accordion-header" id="heading-{{$zadatak->id}}">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapse-{{$zadatak->id}}" aria-expanded="false"
-                    aria-controls="collapse-{{$zadatak->id}}" wire:click="klikniPomoc">
+                    aria-controls="collapse-{{$zadatak->id}}" wire:click="klikniPomoc" wire:loading.attr="disabled">
                 Pomoć
             </button>
         </h2>

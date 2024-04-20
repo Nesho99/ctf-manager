@@ -9,12 +9,16 @@ class Pomoc extends Component
     public $zadatak;
     public $pomocOtvorena = false;
     public $odgovor = "";
+    public $loading = false;
     public function klikniPomoc()
     {
+        $this->loading = true;
         $this->pomocOtvorena = !$this->pomocOtvorena;
+
         if ($this->pomocOtvorena) {
             $this->odgovor = $this->zadatak->pomoc;
         }
+        $this->loading = false;
     }
     public function mount($zadatak)
     {
