@@ -18,7 +18,6 @@ class JeAdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check() || !Auth::user()->jeAdmin()) {
-            // If the user is not an admin, return a 403 Forbidden response
             abort(403, 'Unauthorized action.');
         }
         return $next($request);
