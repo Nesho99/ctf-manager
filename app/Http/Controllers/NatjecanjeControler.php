@@ -19,7 +19,7 @@ class NatjecanjeControler extends Controller
      */
     public function index()
     {
-        $natjecanja = Natjecanje::all(); // Fetch all natjecanje records
+        $natjecanja = Natjecanje::all(); 
         return view('natjecanje.index', compact('natjecanja'));
     }
 
