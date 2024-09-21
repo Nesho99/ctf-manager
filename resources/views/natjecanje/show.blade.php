@@ -135,7 +135,7 @@ $zadatci= $natjecanje->zadatci()->get()
                                 @foreach ($zadatak->dokumenti as $dokument)
                                 <li>
                                     <i class="fa fa-file" style="margin-right: 8px;"></i>
-                                    {{ $dokument->ime}} - <a href="{{ asset($dokument->putanja) }}"
+                                    {{ $dokument->ime}} - <a href="{{ asset("/datoteke//".$dokument->putanja) }}"
                                         download>Skini</a>
                                 </li>
                                 @endforeach
